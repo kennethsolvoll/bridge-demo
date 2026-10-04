@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Rolig palett. Alle tekstfarger har minst 4.5:1 mot bakgrunnene de brukes på. */
+  --color-paper: #f7f6f2;
+  --color-surface: #ffffff;
+  --color-ink: #17262d;
+  --color-muted: #475860;
+  --color-line: #d8dbd6;
+  --color-accent: #1f4e5f;
+  --color-accent-strong: #163a47;
+  --color-accent-soft: #e6eef0;
+  --color-notice: #fbf3dc;
+  --color-notice-ink: #5c4511;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased leading-relaxed;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
