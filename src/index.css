@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Rolig palett. Alle tekstfarger har minst 4.5:1 kontrast mot paper og white. */
+  --color-paper: #f7f6f3;
+  --color-ink: #1b2430;
+  --color-muted: #4a5361;
+  --color-line: #dcd8d0;
+  --color-accent: #0e5f5a;
+  --color-accent-strong: #0a4743;
+  --color-accent-soft: #e4efed;
+  --color-warn-soft: #fbf3e4;
+  --color-warn: #7a4a06;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent-strong);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Hovedinnholdet får fokus via hopp-lenken, men trenger ingen synlig ring. */
+  main:focus-visible {
+    outline: none;
+  }
+}
