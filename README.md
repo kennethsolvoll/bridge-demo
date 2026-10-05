@@ -6,6 +6,8 @@ oppdrag innen web og digitalisering.
 
 > Siden er kun en demo. Alle personer, bedrifter, sitater og priser er fiktive, og det finnes ingen backend.
 
+**Live demo:** https://kennethsolvoll.github.io/bridge-demo/ (engelsk: https://kennethsolvoll.github.io/bridge-demo/?lang=en)
+
 ## Teknologi
 
 - [Vite](https://vite.dev) + React + TypeScript
@@ -37,12 +39,23 @@ Matchelogikken i demoen ligger i `src/lib/matching.ts`: oppdragstype er et krav,
 gir tidsramme og budsjett poeng. Kontakt-e-posten (`site.contactEmail`) er en plassholder,
 så bytt den ut med deres egen adresse.
 
+## Språk (norsk/engelsk)
+
+Siden finnes på norsk bokmål og engelsk, og man bytter med **NO/EN**-knappene i toppmenyen.
+
+- Hver tekst skrives med begge språk side om side: `{ nb: '…', en: '…' }`. TypeScript gir feil
+  hvis et språk mangler. Tekst som er lik på begge språk (navn, «React») kan være en vanlig streng.
+- Maler med `{plassholdere}` fylles ut med `fill()` fra `src/i18n/context.ts`.
+- Valgt språk lagres i nettleseren og legges i URL-en som `?lang=en`, så en lenke kan deles
+  direkte på engelsk. Norsk er standard.
+
 ## Struktur
 
 ```
 src/
-  data/content.ts      All hardkodet data
-  lib/matching.ts      Enkel matchefunksjon for demoen
+  data/content.ts      All hardkodet data og alle tekster (nb + en)
+  i18n/                Språkkontekst, useLocale()-hook og LocaleProvider
+  lib/matching.ts      Enkel, språknøytral matchefunksjon for demoen
   components/          Én komponent per seksjon + felles UI (ui.tsx)
   types.ts             Datamodell
 ```
@@ -71,7 +84,7 @@ Repoet har en ferdig workflow i `.github/workflows/deploy.yml`.
 
 ## Universell utforming
 
-- Semantisk HTML med landemerker, logisk overskriftshierarki og `lang="nb"`
+- Semantisk HTML med landemerker, logisk overskriftshierarki og `lang` som følger valgt språk
 - «Hopp til innhold»-lenke, synlige fokusmarkeringer og full tastaturnavigasjon
 - Skjemaet bruker `fieldset`/`legend`, og resultatene annonseres med `aria-live`
 - Tekstfarger med minst 4,5:1 kontrast, og informasjon formidles ikke kun med farge

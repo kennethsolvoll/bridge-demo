@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import { useLocale } from '../i18n/context'
+import type { Quote } from '../types'
 
 export const buttonPrimary =
   'inline-flex min-h-12 items-center justify-center rounded-md bg-accent px-5 py-3 text-base font-semibold text-white hover:bg-accent-strong'
@@ -71,13 +73,19 @@ export function BridgeMark({ className = 'size-7' }: { className?: string }) {
   )
 }
 
-export function QuoteBlock({ text, name, role }: { text: string; name: string; role: string }) {
+export function QuoteBlock({ quote }: { quote: Quote }) {
+  const { locale, t } = useLocale()
+  const [open, close] = locale === 'nb' ? ['«', '»'] : ['“', '”']
   return (
     <figure className="rounded-lg border border-line bg-white p-6">
-      <blockquote className="text-lg leading-relaxed text-ink">«{text}»</blockquote>
+      <blockquote className="text-lg leading-relaxed text-ink">
+        {open}
+        {t(quote.text)}
+        {close}
+      </blockquote>
       <figcaption className="mt-4 text-sm text-muted">
-        <span className="font-semibold text-ink">{name}</span>
-        <span className="mt-0.5 block italic">{role}</span>
+        <span className="font-semibold text-ink">{t(quote.name)}</span>
+        <span className="mt-0.5 block italic">{t(quote.role)}</span>
       </figcaption>
     </figure>
   )

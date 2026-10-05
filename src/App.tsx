@@ -7,15 +7,19 @@ import { HowItWorks } from './components/HowItWorks'
 import { MatchingDemo } from './components/MatchingDemo'
 import { Packages } from './components/Packages'
 import { Quality } from './components/Quality'
+import { ui } from './data/content'
+import { useLocale } from './i18n/context'
+import { LocaleProvider } from './i18n/LocaleProvider'
 
-export default function App() {
+function Page() {
+  const { t } = useLocale()
   return (
     <>
       <a
         href="#innhold"
         className="sr-only z-50 rounded-md bg-ink px-4 py-3 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
       >
-        Hopp til innhold
+        {t(ui.skipLink)}
       </a>
       <DemoBanner />
       <Header />
@@ -29,5 +33,13 @@ export default function App() {
       </main>
       <Footer />
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <LocaleProvider>
+      <Page />
+    </LocaleProvider>
   )
 }
