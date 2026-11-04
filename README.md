@@ -1,8 +1,8 @@
-# Studentbridge – demo
+# Bond – demo
 
-Demo-nettside for et studentprosjekt i emnet **Entreprenørskap i praksis** ved NTNU. Siden viser idéen til medstudenter, foreleser og potensielle samarbeidspartnere.
+Demo-nettside for et studentprosjekt i emnet **Entreprenørskap i praksis** ved NTNU. Bond kobler håndplukkede markedsføringsstudenter fra hele Norge med scale-ups som trenger hjelp med sosiale medier, kampanjer, innhold og merkevare. Siden viser idéen til medstudenter, foreleser og potensielle samarbeidspartnere.
 
-> Siden er en prototype og skal ikke i produksjon. Alle personer, bedrifter, sitater og priser er fiktive, og vi har ingen avtale om samarbeid med NTNU, Sit eller noen bedrift.
+> Siden er en prototype og skal ikke i produksjon. Alle personer, bedrifter, sitater og priser er fiktive, og vi har ingen avtale om samarbeid med NTNU, andre utdanningsinstitusjoner eller noen bedrift.
 
 **Stack:** Vite + React + Tailwind CSS v4. Det er ingen backend.
 
@@ -44,7 +44,7 @@ Workflowen ligger i `.github/workflows/deploy-pages.yml` og kjører ved push til
 Siden havner på `https://<bruker>.github.io/<repo>/`. Workflowen setter `BASE_PATH=/<repo>/` automatisk, så stiene blir riktige. For å teste Pages-bygget lokalt:
 
 ```bash
-BASE_PATH=/studentbridge-demo/ npm run build
+BASE_PATH=/<repo-navn>/ npm run build
 ```
 
 ## Struktur
@@ -53,7 +53,7 @@ BASE_PATH=/studentbridge-demo/ npm run build
 src/
   data/content.js          all hardkodet data
   lib/match.js             matching-logikk for demoen
-  components/              én komponent per seksjon
+  components/              én komponent per seksjon (Logo.jsx = Bond-logoen som SVG)
   App.jsx                  setter sammen siden
 ```
 

@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
+﻿import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-// BASE_PATH settes kun ved GitHub Pages-deploy (f.eks. "/studentbridge-demo/").
+// BASE_PATH settes kun ved GitHub Pages-deploy (f.eks. "/bond-demo/").
 // Vercel og lokal kjøring bruker rot ("/").
 export default defineConfig({
   base: process.env.BASE_PATH || '/',

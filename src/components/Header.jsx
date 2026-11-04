@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { site, nav } from '../data/content.js'
+import Logo from './Logo.jsx'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -8,10 +9,8 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <a href="#" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span aria-hidden="true" className="grid h-8 w-8 place-items-center rounded-md bg-accent text-sm text-white">
-            SB
-          </span>
-          <span>{site.name}</span>
+          <Logo />
+          <span className="text-lg">{site.name}</span>
           <span className="rounded border border-line px-1.5 py-0.5 text-xs font-medium text-muted">demo</span>
         </a>
 

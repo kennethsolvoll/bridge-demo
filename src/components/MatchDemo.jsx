@@ -78,7 +78,7 @@ export default function MatchDemo() {
               id="beskrivelse"
               rows={3}
               className="mt-2 w-full rounded-md border border-muted/50 bg-surface p-3 text-base"
-              placeholder="F.eks. «Vi trenger en enkel side med åpningstider og meny.»"
+              placeholder="F.eks. «Vi lanserer i Sverige i mars og trenger en kampanje på LinkedIn.»"
             />
           </div>
 

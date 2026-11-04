@@ -9,9 +9,11 @@
   --color-ink: #17262d;
   --color-muted: #475860;
   --color-line: #d8dbd6;
-  --color-accent: #1f4e5f;
-  --color-accent-strong: #163a47;
-  --color-accent-soft: #e6eef0;
+  /* Bond-grønn fra logoen. Hvit tekst på --color-accent har ca. 6:1 kontrast. */
+  --color-brand: #156a62;
+  --color-accent: #156a62;
+  --color-accent-strong: #0e4e48;
+  --color-accent-soft: #e4f0ee;
   --color-notice: #fbf3dc;
   --color-notice-ink: #5c4511;
 }

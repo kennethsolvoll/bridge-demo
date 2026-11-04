@@ -15,6 +15,7 @@ export default function StudentProfileCard({ student, mentor, reasons }) {
           </h4>
           <p className="text-sm text-muted">
             {student.study}, {student.year}
+            <span className="block">Studerer i {student.location}, jobber digitalt</span>
           </p>
         </div>
       </div>
