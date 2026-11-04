@@ -1,91 +1,75 @@
-# Bridge – demo-nettside
+# Bond – demo
 
-Prototype for et studentprosjekt i emnet **Entreprenørskap i praksis** ved NTNU.
-Bridge kobler kvalitetssikrede studenter med småbedrifter i Trondheim for betalte, avgrensede
-oppdrag innen web og digitalisering.
+Demo-nettside for et studentprosjekt i emnet **Entreprenørskap i praksis** ved NTNU. Bond kobler håndplukkede markedsføringsstudenter fra hele Norge med scale-ups som trenger hjelp med sosiale medier, kampanjer, innhold og merkevare. Siden viser idéen til medstudenter, foreleser og potensielle samarbeidspartnere.
 
-> Siden er kun en demo. Alle personer, bedrifter, sitater og priser er fiktive, og det finnes ingen backend.
+> Siden er en prototype og skal ikke i produksjon. Alle personer, bedrifter, sitater og priser er fiktive, og vi har ingen avtale om samarbeid med NTNU, andre utdanningsinstitusjoner eller noen bedrift.
 
-**Live demo:** https://kennethsolvoll.github.io/bridge-demo/ (engelsk: https://kennethsolvoll.github.io/bridge-demo/?lang=en)
+**Stack:** Vite + React + Tailwind CSS v4. Det er ingen backend.
 
-## Teknologi
+## Kjøre lokalt
 
-- [Vite](https://vite.dev) + React + TypeScript
-- Tailwind CSS v4 (via `@tailwindcss/vite`)
-- Ingen backend. All data ligger i [`src/data/content.ts`](src/data/content.ts)
-
-## Kom i gang
-
-Krever Node.js 20.19+ eller 22+.
+Krever Node 20 eller nyere.
 
 ```bash
 npm install
-npm run dev
+npm run dev      # utviklingsserver på http://localhost:5173
+npm run build    # produksjonsbygg til dist/
+npm run preview  # forhåndsvis bygget
 ```
-
-Åpne adressen som vises i terminalen (vanligvis http://localhost:5173).
-
-| Kommando          | Hva den gjør                                |
-| ----------------- | ------------------------------------------- |
-| `npm run dev`     | Utviklingsserver med automatisk oppdatering |
-| `npm run build`   | Typesjekk og produksjonsbygg til `dist/`    |
-| `npm run preview` | Kjør det ferdige bygget lokalt              |
-| `npm run lint`    | Lint med oxlint                             |
 
 ## Endre innhold
 
-Tekster, pakker, priser, studentprofiler og mentorer ligger i `src/data/content.ts`.
-Matchelogikken i demoen ligger i `src/lib/matching.ts`: oppdragstype er et krav, og deretter
-gir tidsramme og budsjett poeng. Kontakt-e-posten (`site.contactEmail`) er en plassholder,
-så bytt den ut med deres egen adresse.
+Siden finnes på **norsk bokmål og engelsk**. Man bytter språk med NO/EN-knappen i headeren, og valget huskes i nettleseren. Lenker med `?lang=en` (eller `?lang=nb`) åpner siden direkte på valgt språk, for eksempel `https://<din-side>/?lang=en`. Uten valg brukes nettleserens språk: norsk for nb/nn/no, ellers engelsk.
 
-## Språk (norsk/engelsk)
+All tekst og data ligger i **`src/data/content.js`**, med ett objekt per språk (`nb` og `en`) som har samme struktur. Når du endrer en tekst, må du endre den begge steder. Matching-dataene (oppdragstyper, kapasitet, budsjett, mentor) ligger felles i `studentBase`, så de ikke kan komme ut av sync mellom språkene.
 
-Siden finnes på norsk bokmål og engelsk, og man bytter med **NO/EN**-knappene i toppmenyen.
+Der ligger også pakker og priser, fiktive studenter og mentorer og tekstene i hver seksjon. Kontakt-e-posten (`contactEmail` øverst i filen) er en plassholder, `kontakt@example.no`, som må byttes.
 
-- Hver tekst skrives med begge språk side om side: `{ nb: '…', en: '…' }`. TypeScript gir feil
-  hvis et språk mangler. Tekst som er lik på begge språk (navn, «React») kan være en vanlig streng.
-- Maler med `{plassholdere}` fylles ut med `fill()` fra `src/i18n/context.ts`.
-- Valgt språk lagres i nettleseren og legges i URL-en som `?lang=en`, så en lenke kan deles
-  direkte på engelsk. Norsk er standard.
+Matching-logikken ligger i `src/lib/match.js`. Den gir hver student poeng for oppdragstype, tidsramme og budsjett, og viser de tre beste.
+
+## Deploy
+
+### Vercel (enklest)
+
+1. Push repoet til GitHub.
+2. Velg «Add New → Project» på vercel.com og importer repoet.
+3. Vercel oppdager Vite automatisk (build: `npm run build`, output: `dist`). Trykk Deploy.
+
+Det trengs ingen ekstra konfigurasjon.
+
+### GitHub Pages
+
+Workflowen ligger i `.github/workflows/deploy-pages.yml` og kjører ved push til `main`.
+
+1. Push repoet til GitHub.
+2. Gå til **Settings → Pages → Build and deployment → Source** og velg **GitHub Actions**.
+3. Push til `main`, eller kjør workflowen manuelt under **Actions**.
+
+Siden havner på `https://<bruker>.github.io/<repo>/`. Workflowen setter `BASE_PATH=/<repo>/` automatisk, så stiene blir riktige. For å teste Pages-bygget lokalt:
+
+```bash
+BASE_PATH=/<repo-navn>/ npm run build
+```
 
 ## Struktur
 
 ```
 src/
-  data/content.ts      All hardkodet data og alle tekster (nb + en)
-  i18n/                Språkkontekst, useLocale()-hook og LocaleProvider
-  lib/matching.ts      Enkel, språknøytral matchefunksjon for demoen
-  components/          Én komponent per seksjon + felles UI (ui.tsx)
-  types.ts             Datamodell
+  data/content.js          all hardkodet data
+  lib/match.js             matching-logikk for demoen
+  components/              én komponent per seksjon (Logo.jsx = Bond-logoen som SVG)
+  App.jsx                  setter sammen siden
 ```
-
-## Deploy
-
-Bygget er helt statisk (`dist/`) og bruker relative stier (`base: './'` i `vite.config.ts`),
-så det fungerer både på rotdomene og under en understi.
-
-### Vercel
-
-1. Push repoet til GitHub.
-2. Velg «Add New → Project» i Vercel og importer repoet.
-3. Vercel gjenkjenner Vite automatisk (build: `npm run build`, output: `dist`). Trykk «Deploy».
-
-Alternativt fra terminalen: `npx vercel` (og `npx vercel --prod` for produksjons-URL).
-
-### GitHub Pages
-
-Repoet har en ferdig workflow i `.github/workflows/deploy.yml`.
-
-1. Push repoet til GitHub.
-2. Gå til **Settings → Pages** og velg **Source: GitHub Actions**.
-3. Workflowen kjører ved hver push til `main` (eller manuelt under **Actions**). Siden publiseres på
-   `https://<brukernavn>.github.io/<repo-navn>/`.
 
 ## Universell utforming
 
-- Semantisk HTML med landemerker, logisk overskriftshierarki og `lang` som følger valgt språk
-- «Hopp til innhold»-lenke, synlige fokusmarkeringer og full tastaturnavigasjon
-- Skjemaet bruker `fieldset`/`legend`, og resultatene annonseres med `aria-live`
-- Tekstfarger med minst 4,5:1 kontrast, og informasjon formidles ikke kun med farge
-- Respekterer `prefers-reduced-motion`
+Siden har:
+
+- semantiske landemerker
+- «hopp til hovedinnhold»-lenke
+- synlig fokusmarkering
+- skjema med `fieldset`/`legend`
+- fokus som flyttes til resultatene etter matching
+- kontrast på minst WCAG AA
+
+Den respekterer også `prefers-reduced-motion` og fungerer fullt ut med tastatur.
