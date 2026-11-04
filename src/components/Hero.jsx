@@ -1,7 +1,9 @@
-import { hero } from '../data/content.js'
+import { useLanguage } from '../i18n.jsx'
 import { ButtonLink } from './Button.jsx'
 
 export default function Hero() {
+  const { t } = useLanguage()
+  const { hero } = t
   return (
     <section aria-labelledby="hero-tittel" className="bg-paper pt-12 pb-16 sm:pt-20 sm:pb-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -18,7 +20,7 @@ export default function Hero() {
           </ButtonLink>
         </div>
 
-        <ul className="mt-10 grid gap-3 text-sm sm:grid-cols-3" aria-label="Kort fortalt">
+        <ul className="mt-10 grid gap-3 text-sm sm:grid-cols-3" aria-label={t.ui.heroPointsLabel}>
           {hero.points.map((p) => (
             <li key={p} className="flex items-start gap-2 rounded-md border border-line bg-surface px-4 py-3">
               <CheckIcon />

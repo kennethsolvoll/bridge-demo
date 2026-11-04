@@ -7,15 +7,17 @@ import Packages from './components/Packages.jsx'
 import MatchDemo from './components/MatchDemo.jsx'
 import ForStudents from './components/ForStudents.jsx'
 import Footer from './components/Footer.jsx'
+import { useLanguage } from './i18n.jsx'
 
 export default function App() {
+  const { t } = useLanguage()
   return (
     <>
       <a
         href="#hovedinnhold"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-ink focus:shadow"
       >
-        Hopp til hovedinnhold
+        {t.ui.skipLink}
       </a>
       <DemoBanner />
       <Header />

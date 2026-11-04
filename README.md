@@ -19,7 +19,11 @@ npm run preview  # forhåndsvis bygget
 
 ## Endre innhold
 
-All tekst og data ligger i **`src/data/content.js`**: navn, kontakt-e-post, pakker og priser, fiktive studenter og mentorer, og tekstene i hver seksjon. Kontakt-e-posten er en plassholder (`kontakt@example.no`) som må byttes.
+Siden finnes på **norsk bokmål og engelsk**. Man bytter språk med NO/EN-knappen i headeren, og valget huskes i nettleseren. Lenker med `?lang=en` (eller `?lang=nb`) åpner siden direkte på valgt språk, for eksempel `https://<din-side>/?lang=en`. Uten valg brukes nettleserens språk: norsk for nb/nn/no, ellers engelsk.
+
+All tekst og data ligger i **`src/data/content.js`**, med ett objekt per språk (`nb` og `en`) som har samme struktur. Når du endrer en tekst, må du endre den begge steder. Matching-dataene (oppdragstyper, kapasitet, budsjett, mentor) ligger felles i `studentBase`, så de ikke kan komme ut av sync mellom språkene.
+
+Der ligger også pakker og priser, fiktive studenter og mentorer og tekstene i hver seksjon. Kontakt-e-posten (`contactEmail` øverst i filen) er en plassholder, `kontakt@example.no`, som må byttes.
 
 Matching-logikken ligger i `src/lib/match.js`. Den gir hver student poeng for oppdragstype, tidsramme og budsjett, og viser de tre beste.
 
